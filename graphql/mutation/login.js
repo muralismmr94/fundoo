@@ -13,20 +13,20 @@ exports.login = {
             type: new GraphQLNonNull(GraphQLString),
         }
     },
-    resolve(_root, params) {
-        const uModel = new UserModel(params);
-        console.log(params.email);
-        // console.log("root: ", root);
-        console.log("params: ", params);
-        console.log("mailkugokl: ", uModel.email);
-       if(params.email == uModel.email){
-        const newUser = uModel.user.email
-        if (!newUser) {
-          throw new Error('Error');
+     resolve(_root, params) {
+        user = UserModel.find({ 'email': params.email })
+        //const uModel = new UserModel(params);
+       // console.log("umodel:", uModel.email);
+        console.log("params: ", params.email);
+        
+
+
+        if (user == params.email) {
+            console.log("login success");
+            return {"message":"login successfully done"}
+        } else {
+            console.log("login unsuccess please try again");
+            return {"message": "login unsuccess"}
         }
-        return newUser
-    }else{
-        console.log("not present");
-    }
     }
 }

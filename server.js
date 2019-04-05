@@ -1,18 +1,25 @@
 const express = require("express");
 const mongoose = require('mongoose');
-const dbConfig = require('./config/config')
-const graphqlHTTP = require("express-graphql");
+const dbConfig = require('./config/config');
+const expressGraphQl = require("express-graphql");
+const cors=require('cors');
+const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser-graphql');
 
 const app = express();
+//app.use(cors());
+//app.use(bodyParser.graphql())
+//app.use(bodyParser.json)// parsing application json
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 const userSchema = require('./graphql/index').userSchema;
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql', expressGraphQl({
   schema: userSchema,
   rootValue: global,
   graphiql: true
 }));
 
-// Up and Running at Port 5000
+// Up and Running at Port 2019
 const port = 5000;
 app.listen(port, () => {
   console.log('A GraphQL API running at port ' + port);
