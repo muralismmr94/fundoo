@@ -3,7 +3,7 @@ var GraphQLString = require('graphql').GraphQLString;
 var UserType = require('../types/users');
 var UserModel = require('../../models/users');
 
-exports.add = {
+exports.register = {
   type: UserType.userType,
   args: {
     firstname: {

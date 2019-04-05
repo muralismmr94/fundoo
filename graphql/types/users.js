@@ -12,16 +12,16 @@ exports.userType = new GraphQLObjectType({
         type: new GraphQLNonNull(GraphQLID)
       },
       firstname: {
-        type: GraphQLString
+        type:new GraphQLNonNull(GraphQLString)
       },
       lastname: {
-        type: GraphQLString
+        type:new GraphQLNonNull(GraphQLString)
       },
       email: {
-        type: GraphQLString
+        type:new GraphQLNonNull(GraphQLString)
       },
       password: {
-        type: GraphQLString
+        type:new GraphQLNonNull(GraphQLString)
       }
 
     }
