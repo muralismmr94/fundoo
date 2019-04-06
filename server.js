@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 //const bodyParser = require('body-parser-graphql');
 
 const app = express();
+app.use(env);
 //app.use(cors());
 //app.use(bodyParser.graphql())
 //app.use(bodyParser.json)// parsing application json
@@ -19,7 +20,7 @@ app.use('/graphql', expressGraphQl({
   graphiql: true
 }));
 
-// Up and Running at Port 2019
+// Up and Running at Port 5000
 const port = 5000;
 app.listen(port, () => {
   console.log('A GraphQL API running at port ' + port);

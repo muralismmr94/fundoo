@@ -32,7 +32,8 @@ exports.userAuth = new GraphQLObjectType({
   name : 'userAuth',
   fields: function () {
     return {
-    message : {type : GraphQLString}
+    message : {type : GraphQLString},
+    token:{type:GraphQLString}
     }
   }
 })

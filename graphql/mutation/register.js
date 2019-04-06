@@ -2,7 +2,7 @@ var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var GraphQLString = require('graphql').GraphQLString;
 var UserType = require('../types/users');
 var UserModel = require('../../models/users');
-var bcrypt = require(bcrypt);
+var bcrypt = require('bcrypt');
 
 function hash(password) {
   var salt = bcrypt.genSaltSync(10);
@@ -27,28 +27,28 @@ exports.register = {
     }
   },
 
-  resolve(_root, params) {
+  async resolve(_root, params) {
     var format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     if (!format.test(params.email)) {
       return { "message": " email format error please check email id" }
     }
-    if (params.password.length < 8) {
-      return { "message": "enter a password which has more than 8 characaters" }
+    if (params.password.length < 5) {
+      return { "message": "enter a password which has more than 5 characaters" }
     }
 
-    user = await UserModel.find({ 'email': params.email })
-    //console.log(user)
-    if (user.length == 0) {
-      console.log("registration successful")
-      let user1 = await new UserModel(params);
-      const newuser = {
-        "firstname": user1.firstname,
-        "lastname": user1.lastname,
-        "email": user1.email,
-        "password": user1.password
-      }
+    let user =  await UserModel.find({ 'email': params.email })
+    //console.log(user.length);
+    if (!user.length>0) { 
+      const newuser = ({
+        "firstname": params.firstname,
+        "lastname": params.lastname,
+        "email": params.email,
+        "password": hash(params.password)
+      });
+      let user1 =  new UserModel(newuser);
 
-      newuser.save();
+      user1.save();
+      console.log("registration successful")
       return {
         "message": "registration successful"
       }
