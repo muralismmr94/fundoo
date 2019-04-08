@@ -1,11 +1,13 @@
 var registerUser = require('./register').register;
  var loginUser = require('./login').login;
- var resetPassword = require('./forgotPassword').forgotPassword;
+ var forgotPassword = require('./forgotPassword').forgotPassword;
+ var resetPassword = require('./resetPassword').resetPassword;
 
 
 module.exports = {
   registerUser,
   loginUser,
+  forgotPassword,
   resetPassword
 
 }

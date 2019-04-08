@@ -9,19 +9,19 @@ exports.userType = new GraphQLObjectType({
   fields: function () {
     return {
       id: {
-        type: new GraphQLNonNull(GraphQLID) 
+        type: new GraphQLNonNull(GraphQLID)
       },
       firstname: {
-        type:new GraphQLNonNull(GraphQLString) 
+        type: new GraphQLNonNull(GraphQLString)
       },
       lastname: {
-        type:new GraphQLNonNull(GraphQLString)
+        type: new GraphQLNonNull(GraphQLString)
       },
       email: {
-        type:new GraphQLNonNull(GraphQLString)
+        type: new GraphQLNonNull(GraphQLString)
       },
       password: {
-        type:new GraphQLNonNull(GraphQLString)
+        type: new GraphQLNonNull(GraphQLString)
       }
 
     }
@@ -29,12 +29,10 @@ exports.userType = new GraphQLObjectType({
 });
 
 exports.userAuth = new GraphQLObjectType({
-  name : 'userAuth',
+  name: 'userAuth',
   fields: function () {
     return {
-    message : {type : GraphQLString},
-    token:{type:GraphQLString}
+      message: { type: GraphQLString }
     }
   }
 })
-  

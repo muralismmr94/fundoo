@@ -36,16 +36,16 @@ exports.login = {
         }
         else {
             let comUser = await bcrypt.compare(params.password, user[0].password)
-            console.log("comUser: ", comUser);
+            //console.log("comUser: ", comUser);
             if (comUser) {
+                console.log("login success")
                 var secret = "abcdefg"
                 var token = jwt.sign({ email: params.email }, secret, { expiresIn: "24h" });
                 return {
-                    "message": "login successfully done",
-                    "token": token
+                    "message":`token genereated ==> ${token}`
                 }
             } else {
-                console.log("login success");
+                console.log("login unsuccess");
                 return { "message": "login unsuccessful" }
             }
         }

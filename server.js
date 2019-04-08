@@ -2,23 +2,18 @@ const express = require("express");
 const mongoose = require('mongoose');
 const dbConfig = require('./config/config');
 const expressGraphQl = require("express-graphql");
-const cors=require('cors');
-const bodyParser = require('body-parser');
-//const bodyParser = require('body-parser-graphql');
+const bodyparser= require('body-parser');
+require('dotenv').config;
 
 const app = express();
-app.use(env);
-//app.use(cors());
-//app.use(bodyParser.graphql())
-//app.use(bodyParser.json)// parsing application json
-//app.use(bodyParser.urlencoded({ extended: true }));
 
 const userSchema = require('./graphql/index').userSchema;
-app.use('/graphql', expressGraphQl({
+app.use('/graphql',bodyparser.json(), expressGraphQl(req=>({
   schema: userSchema,
   rootValue: global,
-  graphiql: true
-}));
+  graphiql: true,
+  context:{token:req.headers.authorization}
+})));
 
 // Up and Running at Port 5000
 const port = 5000;
