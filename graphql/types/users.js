@@ -23,7 +23,6 @@ exports.userType = new GraphQLObjectType({
       password: {
         type: new GraphQLNonNull(GraphQLString)
       }
-
     }
   }
 });
@@ -32,7 +31,9 @@ exports.userAuth = new GraphQLObjectType({
   name: 'userAuth',
   fields: function () {
     return {
-      message: { type: GraphQLString }
+      message: {
+         type: GraphQLString 
+        }
     }
   }
 })

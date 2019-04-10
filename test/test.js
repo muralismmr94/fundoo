@@ -1,53 +1,66 @@
 const chai = require('chai');
 //const assert = require('assert');
 const expect = chai.expect;
-const url = `http://localhost:5000/`;
-const request = require('supertest')(url);
+const test = require('supertest')
+const server = require('../server')
 //var Query = require('../graphql/queries/user').queryType
 
 describe('GraphQL', () => {
+    
 
-    it('Returns user with email', (done) => {
-        request.post('/graphql')
-        .send('mutation{loginUser(email password){message} }')
-        .expect(200)
-        .end((err,res) => {
-            // res will contain array with one user
-            if (err) return done(err);
-            // console.log(err);
-            // console.log(res)
-            res.body.user.should.have.property('id')
-            res.body.user.should.have.property('name')
-            res.body.user.should.have.property('firstname')
-            res.body.users.should.have.property('email')
-            res.body.users.should.have.lengthOf(6);
-            //done();
-           
-        })
-         done();
-    })
-    it('Returns all users', (done) => {
-        
-        request.post('/graphql')
-        .send({ mutation: '{ ( firstname  ) }' })
-        .expect(200)
-        .end((err, res) => {
-            console.log(done);
-            
-            // res will contain array of all users
-            if (err) return done(err);
-            console.log(err);
-            
-            // res.body.users.should.have.property('firstname')
-            // res.body.users.should.have.property('lastname')
-            // res.body.users.should.have.property('email')
-            // res.body.users.should.have.property('password')
-           // assume there are a 5 users in the database
-            res.body.users.should.have.lengthOf(5);
-            
-           
-            
-        })
-        done()
-    })
+    it('loginUser', (done) => {
+        test(server)
+            .post('/graphql')
+            .send({ query: 'mutation{loginUser(email:"muralismmr94@gmail.com" password:"Murali@123"){message} }' })
+            .expect(200)
+            .end((err, res) => {
+
+                if (err) return done(err);
+                expect(JSON.parse(res.text).data.loginUser.message).to.deep.equal(
+                   // "token genereated ==> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmFsaXNtbXI5NEBnbWFpbC5jb20iLCJpYXQiOjE1NTQ4OTYxOTksImV4cCI6MTU1NDk4MjU5OX0.IoS8SU89cS74yTVt1IFdSm6egA4hRy1mq-r2NfulkiM"
+                   "token genereated"
+                )
+                done();
+            })
+    });
+
+    it('registerUser', (done) => {
+        test(server)
+            .post('/graphql')
+            .send({ query: 'mutation{registerUser(firstname:"vicky" lastname:"r" email:"vicky@gmail.com" password:"Vick@123"){message} }' })
+            .expect(200)
+            .end((err, res) => {
+                // console.log(done);
+
+                // res will contain array of all users
+                if (err) return done(err);
+                //console.log(err);
+
+                expect(JSON.parse(res.text).data.registerUser.message).to.deep.equal(
+                    
+                   // "registration successful"
+                   "registration unsuccessful , email already exists"
+                    
+                )
+                done()
+
+
+            })
+
+    });
+    it('forgotPassword', (done) => {
+        test(server)
+            .post('/graphql')
+            .send({ query:'mutation{forgotPassword(email:"muralismmr94@gmail.com"){message}}' })
+            .expect(200)
+            .end((err, res) => {
+
+                if (err) return done(err);
+                expect(JSON.parse(res.text).data.forgotPassword.message).to.deep.equal(
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11cmFsaXNtbXI5NEBnbWFpbC5jb20iLCJpYXQiOjE1NTQ5MDA0MTAsImV4cCI6MTU1NDk4NjgxMH0.z1nsWYpJupa1pPejJncRdqVJNhk_uTUYH1WFx5Ldah8"
+                )
+                done();
+            })
+    });
+
 })

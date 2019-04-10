@@ -18,10 +18,13 @@ var userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
-},
-    {
+    },
+
+    verified: {
+        type: Boolean,
         timestamps: true
-    });
+    }
+
+});
 var Model = mongoose.model('User', userSchema);
 module.exports = Model;

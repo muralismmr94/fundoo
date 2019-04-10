@@ -29,3 +29,5 @@ mongoose.connect(dbConfig.url, {
   console.log("Unsucess to connected to database");
   process.exit();
 });
+
+module.exports = app

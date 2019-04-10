@@ -27,6 +27,7 @@ exports.login = {
             return { "message": "enter a password which has more than 5 characters" }
         }
 
+
         var user = await UserModel.find({ 'email': params.email })
 
         if (user.length == 0) {
@@ -35,14 +36,15 @@ exports.login = {
 
         }
         else {
-            let comUser = await bcrypt.compare(params.password, user[0].password)
+            let comUser = await bcrypt.compare(params.password, user[0].password);
             //console.log("comUser: ", comUser);
             if (comUser) {
                 console.log("login success")
                 var secret = "abcdefg"
                 var token = jwt.sign({ email: params.email }, secret, { expiresIn: "24h" });
                 return {
-                    "message":`token genereated ==> ${token}`
+                     "message":`token genereated ==> ${token}`
+                   // "message":"token genereated"
                 }
             } else {
                 console.log("login unsuccess");

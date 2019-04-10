@@ -2,7 +2,6 @@ var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var GraphQLString = require('graphql').GraphQLString;
 var UserType = require('../types/users').userAuth;
 var UserModel = require('../../models/users');
-//var sendmailer = require('../../sendmailer')
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 

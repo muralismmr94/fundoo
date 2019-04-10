@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-exports.sendEmailer = (url, email) => {
+exports.sendEmailer = (url, mailaddress) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -10,7 +10,7 @@ exports.sendEmailer = (url, email) => {
     });
     const mailOptions = {
         from: process.env.email,
-        to: email,
+        to: mailaddress,
         subject: ' password reset link ',
         text: 'Please go through the e-mail verifaction link provided in this mail:\n\n' + url
     };
