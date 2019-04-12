@@ -19,6 +19,7 @@ var UserType = require('../types/users').userAuth;
 var UserModel = require('../../models/users');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+var redis = require('redis');
 
 /**
  * exporting the login function
@@ -63,6 +64,18 @@ exports.login = {
             if (comUser) {
                 var secret = "abcdefg"
                 var token = jwt.sign({ email: params.email }, secret, { expiresIn: "24h" });
+
+                //creating redis client 
+                var client = redis.createClient();
+                client.set("token", token);
+                client.get("token", function (err, result) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        console.log('result get on redis login ==> ' + result);
+                    }
+                });
                 console.log("login success  ==>   " + token);
                 return {
                     //"message":`token genereated ==> ${token}`

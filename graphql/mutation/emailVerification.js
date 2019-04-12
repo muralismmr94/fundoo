@@ -28,10 +28,10 @@ exports.emailVerification = {
      * @param {*} params :it is used to fetching the client enter value
      * @param {*} context :object shared by all resolvers
      */
-    async resolve(root, params, context) {
+    async resolve(_root, _params, context) {
 
         const secret = "abcdefg"
-        console.log(context.token)
+        //console.log(context.token)
         //verifing the token
         const payload = await jwt.verify(context.token, secret)
         // setting the verification is true and updating in database.

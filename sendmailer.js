@@ -13,6 +13,7 @@
 /**
  * requiring the node mailer
  */
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 /**
  * @description : exporting the sendmailer
@@ -25,8 +26,8 @@ exports.sendEmailer = (url, mailaddress) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.email,
-            pass: process.env.pass
+            user: process.env.EMAIL,
+            pass: process.env.PASS
         },
     });
     /**
@@ -43,9 +44,9 @@ exports.sendEmailer = (url, mailaddress) => {
      */
     transporter.sendMail(mailOptions, (err, info) => {
 
-        if (err) {
-            console.log("error on sending mail ", err)
-        }
+        if (err)
+            console.log("error on sending mail ", err);
+
         else
             console.log('result of sending mail ', info);
     });

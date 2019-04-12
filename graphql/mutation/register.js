@@ -4,7 +4,7 @@
  * purpose  : register the user 
  * @description
  * @file    : register.js
- * @overview :This is used to register the user .
+ * @overview:This is used to register the user .
  * @author  : Murali s <muralismmr94@gmail.com>
  * @version :1.0
  * 
@@ -16,8 +16,11 @@ var GraphQLString = require('graphql').GraphQLString;
 var UserType = require('../types/users');
 var UsersModel = require('../../models/users');
 var bcrypt = require('bcrypt');
-var jwt = require('jsonwebtoken')
-var sendEmailer = require('../../sendmailer')
+var jwt = require('jsonwebtoken');
+var sendEmailer = require('../../sendmailer');
+var redis = require('redis');
+
+
 
 // generating the hash function.
 function hash(password) {
@@ -26,7 +29,7 @@ function hash(password) {
   return hashPassword;
 }
 
-// exporting the reegister user 
+// exporting the register user 
 exports.register = {
   type: UserType.userAuth,
   args: {
@@ -67,13 +70,28 @@ exports.register = {
         "password": hash(params.password),
         "verified": false
       });
-      // storing the database 
+      // storing user to  database 
       let user1 = new UsersModel(newuser);
       user1.save();
 
       var secret = "abcdefg"
+
+
       //creating the token.
       var token = jwt.sign({ email: params.email }, secret);
+
+      //creating redis client
+      var client = redis.createClient();
+      client.set("token", token);
+      client.get("token", function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          console.log('result get on register  ' + result);
+        }
+      });
+
       const url = `http://localhost:5000/emailVerification/${token}`
       // sending the node mailer
       sendEmailer.sendEmailer(url, params.email);

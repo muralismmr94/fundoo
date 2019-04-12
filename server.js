@@ -11,16 +11,17 @@
  * 
  ***************************************************************************/
 
- //importing required modules
+//importing required modules
 const express = require("express");
 const mongoose = require('mongoose');
 const dbConfig = require('./config/config');
 const expressGraphQl = require("express-graphql");
 const bodyparser = require('body-parser');
-require('dotenv').config;
+require('dotenv').config();
+var redis = require('redis');
 //define the application as as express
 const app = express();
- //importing the user schema
+//importing the user schema
 const userSchema = require('./graphql/index').userSchema;
 //assaining the graphql api
 app.use('/graphql', bodyparser.json(), expressGraphQl(req => ({
@@ -28,8 +29,8 @@ app.use('/graphql', bodyparser.json(), expressGraphQl(req => ({
   rootValue: global,
   graphiql: true,
   context: { token: req.headers.authorization }
-})));  
-      
+})));
+
 // Up and Running at Port 5000
 const port = 5000;
 // application listening the port
@@ -42,8 +43,19 @@ mongoose.connect(dbConfig.url, {
 }).then(() => {
   console.log("successfully connected to database ");
 }).catch(() => {
-  console.log("Unsucess to connected to database");
+  console.log("Unsuccess to connected to database");
   process.exit();
 });
+
+
+// creating redis server
+var client = redis.createClient();
+client.on('connect', function () {
+  console.log('Redis client connected');
+});
+client.on('error', function (err) {
+  console.log('Something went wrong to connect on redis' + err);
+});
+
 // exporting the module
 module.exports = app

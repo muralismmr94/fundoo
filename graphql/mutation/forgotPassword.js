@@ -19,6 +19,7 @@ var UserType = require('../types/users').userAuth;
 var UserModel = require('../../models/users');
 var sendmailer = require('../../sendmailer');
 var jwt = require('jsonwebtoken');
+var redis = require('redis');
 
 /**
  * exporting the function
@@ -43,7 +44,20 @@ exports.forgotPassword = {
         if (user.length > 0) {
             var secret = "abcdefg"
             var token = jwt.sign({ email: params.email }, secret, { expiresIn: "24h" });
-            const url = `http://localhost:5000/resetPassword/${token}`
+
+            //creating redis client
+            var client = redis.createClient();
+            client.set("token", token);
+            client.get("token", function (err, result) {
+              if (err) {
+                console.log(err);
+              }
+              else {
+                console.log('result get on forgotPassword  ' + result);
+              }
+            });
+
+            const url = `http://localhost:5000/resetPassword  /${token}`
             sendmailer.sendEmailer(url, params.email);
             console.log("forgot password successfully executed" + token);
 

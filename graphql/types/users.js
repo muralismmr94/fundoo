@@ -4,7 +4,7 @@
  * purpose  : defining the types of graphql objects
  * @description
  * @file    : users.js
- * @overview :it is used to defing the types of the system.
+ * @overview :it is used to defining the types of the system.
  * @author  : Murali s <muralismmr94@gmail.com>
  * @version :1.0
  * 
