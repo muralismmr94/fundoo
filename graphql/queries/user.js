@@ -30,7 +30,7 @@ exports.queryType = new GraphQLObjectType({
         resolve: function () {
           const users = UserModel.find().exec()
           if (!users) {
-            throw new Error('Error')
+            throw new Error(' users not available')
           }
           return users
         }

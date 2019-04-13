@@ -51,7 +51,7 @@ mongoose.connect(dbConfig.url, {
 // creating redis server
 var client = redis.createClient();
 client.on('connect', function () {
-  console.log('Redis client connected');
+  console.log('Redis client connection on');
 });
 client.on('error', function (err) {
   console.log('Something went wrong to connect on redis' + err);

@@ -46,8 +46,9 @@ exports.resetPassword = {
         if (params.conformpassword < 5) {
             return { "message": "enter a password which has more than 5 characters" }
         }
+        
         // validating the password and conformpassword is matchs or not
-        if (!params.password == params.conformpassword) {
+        if (!(params.password == params.conformpassword)) {
             return {
                 "message": "your entered password is not matched please re-enter "
             }

@@ -6,6 +6,8 @@ var loginUser = require('./login').login;
 var forgotPassword = require('./forgotPassword').forgotPassword;
 var resetPassword = require('./resetPassword').resetPassword;
 var emailVerification = require('./emailVerification').emailVerification;
+var addLabel = require('./labels/addlabels').addlabel;
+var removeLabel = require('./labels/removeLabel').removeLabel;
 
 
 /**
@@ -16,5 +18,7 @@ module.exports = {
   loginUser,
   forgotPassword,
   resetPassword,
-  emailVerification
+  emailVerification,
+  addLabel,
+  removeLabel
 }

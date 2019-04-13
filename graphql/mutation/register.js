@@ -13,7 +13,7 @@
 // require the files
 var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var GraphQLString = require('graphql').GraphQLString;
-var UserType = require('../types/users');
+var UserType = require('../types/users').userAuth;
 var UsersModel = require('../../models/users');
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
@@ -31,7 +31,7 @@ function hash(password) {
 
 // exporting the register user 
 exports.register = {
-  type: UserType.userAuth,
+  type: UserType,
   args: {
     firstname: {
       type: new GraphQLNonNull(GraphQLString),
@@ -75,8 +75,6 @@ exports.register = {
       user1.save();
 
       var secret = "abcdefg"
-
-
       //creating the token.
       var token = jwt.sign({ email: params.email }, secret);
 
@@ -88,7 +86,7 @@ exports.register = {
           console.log(err);
         }
         else {
-          console.log('result get on register  ' + result);
+          console.log('result get on register ==> ' + result);
         }
       });
 
