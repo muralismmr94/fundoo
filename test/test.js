@@ -16,34 +16,33 @@ const chai = require('chai');
 const expect = chai.expect;
 const test = require('supertest');
 const server = require('../server');
-const chai_http = require('chai-http');
-chai.use(chai_http);
-
-//const read = require('readline-sync');
-function testj(){
 const fs = require('fs');
+/**
+ * reading the json file
+ */
 const readJson = fs.readFileSync('/home/admin1/Desktop/fundoo/test/testJson.json');
+/**
+ * converting string to object type
+ */
 const data = JSON.parse(readJson);
-console.log(data)
-return data;
-}
-console.log("required values of the entaired values"+testj());
+//console.log(`data display ${data.registerUser[0].email} `);
 
 /**
  * the function which holds the collection of tests
  */
 describe('GraphQL', () => {
 
-   
     /**
      * a function which is actually a test of login
      */
     it('loginUser', (done) => {
-        const jsonObj = testj();
+        // const jsonObj = testj();
         test(server)
             .post('/graphql')
-           // .send({ query: 'mutation{loginUser(email:"muralismmr94@gmail.com" password:"Murali@123"){message} }' })
-           .send({query:jsonObj+'{message}'})
+            .send({
+                query: `mutation{loginUser(email: "${data.loginUser.email}"
+                        password: "${data.loginUser.password}"){message}}`
+            })
             .expect(200)
             .end((err, res) => {
                 /**
@@ -65,8 +64,12 @@ describe('GraphQL', () => {
     it('registerUser', (done) => {
         test(server)
             .post('/graphql')
-           // .send({ query: 'mutation{registerUser(firstname:"murali" lastname:"s" email:"muralismmr94@gmail.com" password:"Murali@123"){message} }' })
-           .send({query:'mutation{jsonObj.registerUser}){message}}'})
+            .send({
+                query: `mutation{registerUser(firstname:"${data.registerUser[0].firstname}"
+                                                lastname:"${data.registerUser[0].lastname}"
+                                                email:"${data.registerUser[0].email}"
+                                                password:"${data.registerUser[0].password}"      
+           ){message}}`})
             .expect(200)
             .end((err, res) => {
                 /**
@@ -91,7 +94,7 @@ describe('GraphQL', () => {
     it('forgotPassword', (done) => {
         test(server)
             .post('/graphql')
-            .send({ query: 'mutation{forgotPassword(email:"muralismmr94@gmail.com"){message}}' })
+            .send({ query: `mutation{forgotPassword(email:"${data.forgotPassword.email}"){message}}` })
             .expect(200)
 
             .end((err, res) => {
@@ -117,29 +120,3 @@ describe('GraphQL', () => {
 
 
 
-// "registerUser": [
-//     {
-//         "firstname": "murali",
-//         "lastname": "s",
-//         "email": "muralismmr94@gmail.com",
-//         "password": "Murali@123"
-//     },
-//     {
-//         "firstname": "manoj",
-//         "lastname": "s",
-//         "email": "manoj@gmail.com",
-//         "password": "Manoj@123"
-//     },
-//     {
-//         "firstname": "akshay",
-//         "lastname": "ks",
-//         "email": "akshaykc27@gmail.com",
-//         "password": "Akshay@123"
-//     },
-//     {
-//         "firstname": "prasanna",
-//         "lastname": "more",
-//         "email": "prasanna.more@gmail.com",
-//         "password": "Prasanna@123"
-//     }
-// ],

@@ -16,10 +16,11 @@ var Schema= mongoose.Schema;
  
 // creating the labals Schema
 var labelSchema=new Schema({
-email:{
-    type:String,
-    required :true
+   userid:{
+        type:String,
+        required:true
     },
+
 label:{
     type:String,
     required:true

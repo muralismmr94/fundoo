@@ -14,7 +14,6 @@
  * require the necesarry modules types of graphql
  */
 var GraphQLObjectType = require('graphql').GraphQLObjectType;
-var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var GraphQLID = require('graphql').GraphQLID;
 var GraphQLString = require('graphql').GraphQLString;
 
@@ -26,19 +25,19 @@ exports.userType = new GraphQLObjectType({
   fields: function () {
     return {
       id: {
-        type: new GraphQLNonNull(GraphQLID)
+        type: GraphQLID
       },
       firstname: {
-        type: new GraphQLNonNull(GraphQLString)
+        type: GraphQLString
       },
       lastname: {
-        type: new GraphQLNonNull(GraphQLString)
+        type:GraphQLString
       },
       email: {
-        type: new GraphQLNonNull(GraphQLString)
+        type: GraphQLString
       },
       password: {
-        type: new GraphQLNonNull(GraphQLString)
+        type:GraphQLString
       }
     }
   }
@@ -53,6 +52,18 @@ exports.userAuth = new GraphQLObjectType({
     return {
       message: {
         type: GraphQLString
+      }
+    }
+  }
+});
+
+//exporting the label type
+exports.labelType = new GraphQLObjectType({
+  name: 'labelUser',
+  fields: function () {
+    return {
+      label: {
+        type:GraphQLString
       }
     }
   }

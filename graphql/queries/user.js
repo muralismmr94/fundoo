@@ -14,9 +14,13 @@
  * require the files 
  */
 var GraphQLObjectType = require('graphql').GraphQLObjectType;
+var GraphQLString = require('graphql').GraphQLString;
 var GraphQLList = require('graphql').GraphQLList;
 var UserModel = require('../../models/users');
 var userType = require('../types/users').userType;
+var labelModel = require('../../models/labelsModels')
+var labelType = require('../types/users').labelType;
+const jwt = require('jsonwebtoken');
 
 /**
  * exporting the queryType function and creating the new object 
@@ -34,7 +38,29 @@ exports.queryType = new GraphQLObjectType({
           }
           return users
         }
+      },
+
+
+      labels: {
+        type: new GraphQLList(labelType),
+        args: {
+          userId: {
+            type: GraphQLString
+          }
+        },
+        resolve: async (parant, args) => {
+          const labels = await labelModel.find({ "userid": args.userId })
+         // console.log(labels);
+
+          if (!labels) {
+            throw new Error('labels not available')
+          }
+          return labels
+        }
+
       }
+
+
     }
   }
-});
+})

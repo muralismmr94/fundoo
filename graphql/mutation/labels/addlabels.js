@@ -13,7 +13,7 @@
 // importing the files
 var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var GraphQLString = require('graphql').GraphQLString;
-var TokenModule = require('../../../models/labelsModels');
+var labelModule = require('../../../models/labelsModels');
 //var userModule = require('../../models/users');
 var authtype = require('../../types/users').userAuth;
 var jwt = require('jsonwebtoken');
@@ -22,9 +22,9 @@ var jwt = require('jsonwebtoken');
 exports.addlabel = {
     type: authtype,
     args: {
-        // email: {
-        //     type: GraphQLString
-        // },
+        userid: {
+            type: GraphQLString
+        },
 
         label: {
             type: new GraphQLNonNull(GraphQLString)
@@ -34,9 +34,9 @@ exports.addlabel = {
     //creating resolver function for add labals
     async resolve(_parant, params, context) {
         try {
-            if (params.label.length < 5) {
+            if (params.label.length < 3) {
                 return {
-                    message: "enter a charecters minimum 5  if you want to generate a label"
+                    message: "enter a charecters minimum 3 if you want to generate a label"
                 }
             }
 
@@ -45,13 +45,15 @@ exports.addlabel = {
             const secret = "abcdefg"
             //verifing the token
             const payload = jwt.verify(context.token, secret)
+            console.log(payload.id);
+            
             //verifing email is true 
-            if (payload.email) {
+            if (payload) {
                 const newLabel = ({
-                    "email": payload.email,
+                    "userid": payload.id,
                     "label": params.label
                 })
-                const user = TokenModule(newLabel);
+                const user = labelModule(newLabel);
                 const pass = user.save();
                 if (pass) {
                     console.log("label generated successfully")

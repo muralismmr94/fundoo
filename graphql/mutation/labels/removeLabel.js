@@ -1,25 +1,30 @@
 var GraphQLNonNull = require('graphql').GraphQLNonNull;
 var GraphQLString = require('graphql').GraphQLString;
-var TokenModule = require('../../../models/labelsModels');
+var labelModel = require('../../../models/labelsModels');
 var authType = require('../../types/users').userAuth;
 var jwt = require('jsonwebtoken');
 
 exports.removeLabel = {
     type: authType,
     args: {
+        id:{
+            type:GraphQLString
+        },
         label: {
             type: new GraphQLNonNull(GraphQLString)
         }
     },
 
-    async resolve(_parent, _param, context) {
+    async resolve(_parent, param, context) {
         try {
             const secret = "abcdefg"
             payload = jwt.verify(context.token, secret);
-            //  const id=context._id;
-            //  console.log(id);
+            //  const id=context.id;
+             console.log(payload.id);
 
-            const user = await TokenModule.findOneAndDelete({'email':payload.email}).exec();
+            const user = await labelModel.findOneAndDelete({'_id':param.id}).exec();
+            console.log(user);
+            
             if (user) {
                 console.log('remove label successfull');
                 return {

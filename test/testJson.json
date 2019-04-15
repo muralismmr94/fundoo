@@ -1,14 +1,36 @@
-[ 
-    "mutation" : {
-      
-        "loginUser":{ 
+{
+    "loginUser": {
+        "email": "muralismmr94@gmail.com",
+        "password": "Murali@123"
+    },
+    "forgotPassword":{
+        "email":"muralismmr94@gmail.com"
+
+    },
+    "registerUser": [
+        {
+            "firstname": "murali",
+            "lastname": "s",
             "email": "muralismmr94@gmail.com",
             "password": "Murali@123"
-        }
+        },
         {
-            "message"
+            "firstname": "manoj",
+            "lastname": "s",
+            "email": "manoj@gmail.com",
+            "password": "Manoj@123"
+        },
+        {
+            "firstname": "akshay",
+            "lastname": "ks",
+            "email": "akshaykc27@gmail.com",
+            "password": "Akshay@123"
+        },
+        {
+            "firstname": "prasanna",
+            "lastname": "more",
+            "email": "prasanna.more@gmail.com",
+            "password": "Prasanna@123"
         }
-    }
-
-
-]
+    ]
+}
