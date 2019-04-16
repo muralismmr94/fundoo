@@ -56,7 +56,7 @@ exports.addlabel = {
                 const user = labelModule(newLabel);
                 const pass = user.save();
                 if (pass) {
-                    console.log("label generated successfully")
+                    console.log("label generated successfully");
                     return {
                         "message": "label generated successfully"
                     }
@@ -75,7 +75,6 @@ exports.addlabel = {
             }
         } catch (err) {
             console.log(err);
-
         }
     }
 }

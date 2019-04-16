@@ -88,7 +88,7 @@ exports.register = {
         }
       });
 
-      const url = `http://localhost:5000/emailVerification/${token}`
+      const url = `http://localhost:5000/emailVerification?token=${token}`
       // sending the node mailer
       sendEmailer.sendEmailer(url, params.email);
       console.log("registration successful");

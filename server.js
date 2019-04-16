@@ -28,7 +28,7 @@ app.use('/graphql', bodyparser.json(), expressGraphQl(req => ({
   schema: userSchema,
   rootValue: global,
   graphiql: true,
-  context: { token: req.headers.authorization }
+  context: req.query
 })));
 
 // Up and Running at Port 5000

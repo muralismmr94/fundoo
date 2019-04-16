@@ -10,23 +10,23 @@
  * @since   :13/04/2019
  * ***************************************************************************/
 // require the mongoose
-var mongoose=require('mongoose');
+var mongoose = require('mongoose');
 //creating the mongoose schema insatnce
-var Schema= mongoose.Schema;
- 
+var Schema = mongoose.Schema;
+
 // creating the labals Schema
-var labelSchema=new Schema({
-   userid:{
-        type:String,
-        required:true
+var labelSchema = new Schema({
+    userid: {
+        type: String,
+        required: true
     },
 
-label:{
-    type:String,
-    required:true
-}
+    label: {
+        type: String,
+        required: true
+    }
 })
 // assigning the mongoose model
-var ModuleLabel = mongoose.model('labelSchema',labelSchema);
+var ModuleLabel = mongoose.model('labelSchema', labelSchema);
 // module exporting 
-module.exports= ModuleLabel;
+module.exports = ModuleLabel;
