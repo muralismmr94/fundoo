@@ -26,9 +26,11 @@ function hash(password) {
   var hashPassword = bcrypt.hashSync(password, salt);
   return hashPassword;
 }
+// creating an empty function
+function allFiles(){ }
 
 // exporting the register user 
-exports.register = {
+allFiles.prototype.register = {
   type: UserType,
   args: {
     firstname: {
@@ -118,7 +120,7 @@ exports.register = {
 /**
  * exporting the login function
  */
-exports.login = {
+allFiles.prototype.login = {
   type: UserType,
   args: {
     email: {
@@ -194,7 +196,7 @@ exports.login = {
 /**
  * exporting the function
  */
-exports.forgotPassword = {
+allFiles.prototype.forgotPassword = {
   type: UserType,
   args: {
     email: {
@@ -249,7 +251,7 @@ exports.forgotPassword = {
  */
 
 //exporting the reset password
-exports.resetPassword = {
+allFiles.prototype.resetPassword = {
   type: UserType,
   args: {
     password: {
@@ -310,7 +312,7 @@ exports.resetPassword = {
 /**
 * exporting the emailverificatiion function
 */
-exports.emailVerification = {
+allFiles.prototype.emailVerification = {
   type: UserType,
   /**
    * resolver function for email verification  
@@ -337,3 +339,4 @@ exports.emailVerification = {
   }
 }
 
+module.exports= new allFiles;

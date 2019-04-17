@@ -6,11 +6,12 @@ var loginUser = require('./allFiles').login;
 var forgotPassword = require('./allFiles').forgotPassword;
 var resetPassword = require('./allFiles').resetPassword;
 var emailVerification = require('./allFiles').emailVerification;
-var addLabel = require('./labels/addlabels').addlabel;
-var removeLabel = require('./labels/removeLabel').removeLabel;
-var updateLabel = require('./labels/updateLabel').updateLabel
-
-
+var addLabel = require('./labels').addlabel;
+var removeLabel = require('./labels').removeLabel;
+var updateLabel = require('./labels').updateLabel;
+var addNote = require('./notes').createNote;
+var removeNote = require('./notes').deleteNotes;
+var updateNote = require('./notes').updateNote;
 /**
  * exporting the files 
  */
@@ -22,5 +23,8 @@ module.exports = {
   emailVerification,
   addLabel,
   removeLabel,
-  updateLabel
+  updateLabel,
+  addNote,
+  removeNote,
+  updateNote
 }
