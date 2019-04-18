@@ -111,6 +111,27 @@ describe('GraphQL', () => {
                 done();
             })
     });
+
+    it('addLabel', (done) => {
+        test(server)
+            .post('/graphql')
+            .send({ query: `mutation{forgotPassword(email:"${data.forgotPassword.email}"){message}}` })
+            .expect(200)
+
+            .end((err, res) => {
+                /**
+                * if error means its shows an error
+                */
+                if (err) return done(err);
+                /**
+                * if expected data comes means its shows forgot password success
+                */
+                expect(JSON.parse(res.text).data.forgotPassword.message).to.deep.equal(
+                    "forgot password executed"
+                )
+                done();
+            })
+    });
 })
 
 

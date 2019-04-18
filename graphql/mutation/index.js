@@ -1,6 +1,8 @@
 /**
  * require the necessary files
  */
+
+ var GraphQLObjectType =require('graphql').GraphQLObjectType;
 var registerUser = require('./allFiles').register;
 var loginUser = require('./allFiles').login;
 var forgotPassword = require('./allFiles').forgotPassword;
@@ -15,7 +17,9 @@ var updateNote = require('./notes').updateNote;
 /**
  * exporting the files 
  */
-module.exports = {
+module.exports = new GraphQLObjectType({
+  name: 'Mutation',
+  fields:{
   registerUser,
   loginUser,
   forgotPassword,
@@ -28,3 +32,4 @@ module.exports = {
   removeNote,
   updateNote
 }
+})

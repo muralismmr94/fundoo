@@ -52,7 +52,7 @@ labels.prototype.addlabel = {
             //verifing email is true 
             if (payload) {
                 const dataverify = await labelModel.find({ "label": params.label })
-                console.log("fdat verifd",dataverify);
+               // console.log("fdat verifd",dataverify);
 
                 var pass;
                 if (dataverify.length==0) {
@@ -64,6 +64,7 @@ labels.prototype.addlabel = {
                     pass = user.save();
                 }
                 else {
+                    console.log("already presented same name please try another name");
                     return {
                         "message": "already presented same name please try another name"
                     }

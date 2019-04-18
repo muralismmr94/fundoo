@@ -2,9 +2,15 @@ var mongoose = require('mongoose');
 var Schemaaa = mongoose.Schema;
 
 var notesSchema = new Schemaaa({
-    labelId: {
-        type: Schemaaa.Types.ObjectId,
-        ref: "userSchema"
+    userId: {
+        type:String,
+        required:true
+    },
+    labelId:{
+        type:String,
+        required:true
+        // type:Schemaaa.Types.ObjectId,
+        // ref:"labelSchema"
     },
     title: {
         type: String,

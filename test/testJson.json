@@ -32,5 +32,8 @@
             "email": "prasanna.more@gmail.com",
             "password": "Prasanna@123"
         }
-    ]
+    ],
+    "addlabel":{
+        "label":"murali reddy"
+    }
 }

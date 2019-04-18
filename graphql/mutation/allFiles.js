@@ -325,7 +325,7 @@ allFiles.prototype.emailVerification = {
     const secret = "abcdefg"
     const payload = await jwt.verify(context.token, secret)
     // setting the verification is true and updating in database.
-    userUpdate = await UserModel.updateOne({ "email": payload.email }, { $set: { "verified": true } })
+    userUpdate = await UserModel.updateOne({ "_id": payload.id }, { $set: { "verified": true } })
     if (userUpdate) {
       return {
         "message": "verified successfully"

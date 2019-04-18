@@ -67,4 +67,28 @@ exports.labelType = new GraphQLObjectType({
       }
     }
   }
+});
+
+// exporting notes type 
+exports.noteType = new GraphQLObjectType({
+  name:'noteUser',
+  fields:function(){
+    return{
+      _id:{
+        type:GraphQLString
+      },
+      title:{
+        type:GraphQLString
+      },
+      description:{
+        type:GraphQLString
+      },
+      labelId:{
+        type:GraphQLString
+      },
+      userId:{
+        type:GraphQLString
+      }
+    }
+  }
 })

@@ -1,16 +1,19 @@
 var GraphqlNonNull = require('graphql').GraphQLNonNull;
 var GraphqlString = require('graphql').GraphQLString;
-//var GRaphqlID  =require ('graphql').GraphQLID;
 var notesModel = require('../../models/notesModel');
 var userModel = require('../../models/users');
 var userAuth = require('../types/users').userAuth;
 var jwt = require('jsonwebtoken');
+var labelModel = require('../../models/labelsModels');
 
 function notesfiles() { }
 
 notesfiles.prototype.createNote = {
     type: userAuth,
     args: {
+        labelId: {
+            type: new GraphqlNonNull(GraphqlString)
+        },
 
         title: {
             type: new GraphqlNonNull(GraphqlString)
@@ -21,7 +24,7 @@ notesfiles.prototype.createNote = {
     },
     async resolve(parent, params, context) {
         try {
-                       if (params.title.length < 3) {
+            if (params.title.length < 3) {
                 console.log("please enter a minimum 3 charecters in title");
                 return {
                     'message': "please enter a minimum 3 charecters in title"
@@ -36,34 +39,51 @@ notesfiles.prototype.createNote = {
 
             var secret = "abcdefg"
             var payload = await jwt.verify(context.token, secret);
+            console.log(payload.id)
             var dataverify = await notesModel.findOne({ "title": params.title })
-        
+
             if (dataverify) {
                 console.log("label name already present please enter a different name");
                 return {
                     "message": "label name already present please enter a different name"
                 }
             }
-            if (payload) {
-                const newNote = {
-                    title: params.title,
-                    description: params.description,
-                    labelId: payload.id
-                }
-                const store = new notesModel(newNote);
-                store.save();
-                console.log("notes created successfully");
-                return {
-                    "message": "nodes created successfully"
-                }
 
-            }
-            else {
-                return {
-                    "message": "nodes created unsuccessfully"
+
+            // var mongoose = require('mongoose');
+            // var id = mongoose.Types.ObjectId(params.labelId);
+            // var labelIdVerify = await labelModel.findById({ "_id":`ObjectId("${params.labelId}")`});
+            // console.log(labelIdVerify == null)  
+            // if (!labelIdVerify == null) {
+            
+
+                if (payload) {
+                    const newNote = {
+                        title: params.title,
+                        description: params.description,
+                        userId: payload.id,
+                        labelId: params.labelId
+                    }
+                    const store = new notesModel(newNote);
+                    store.save();
+                    console.log("notes created successfully");
+                    return {
+                        "message": "notes created successfully"
+                    }
+
+                }
+                else {
+                    return {
+                        "message": "notes created unsuccessfully"
+                    }
                 }
             }
-        }
+            // else{
+            //     return{
+            //         "message":"label id is not a valid id"
+            //     }
+            // }
+        
         catch (err) {
             console.log(err);
         }
@@ -71,22 +91,22 @@ notesfiles.prototype.createNote = {
 
 },
 
-/**
- * *****************************************************************************************
- *                                      DELETE NOTES
- * ******************************************************************************************
- */
+    /**
+     * *****************************************************************************************
+     *                                      DELETE NOTES
+     * ******************************************************************************************
+     */
 
     notesfiles.prototype.deleteNotes = {
         type: userAuth,
         args: {
-            id: {
+            noteId: {
                 type: new GraphqlNonNull(GraphqlString)
             }
         },
         async resolve(parent, params, context) {
             try {
-                
+
                 var secret = 'abcdefg'
                 var payload = await jwt.verify(context.token, secret);
                 console.log(payload);
@@ -109,16 +129,22 @@ notesfiles.prototype.createNote = {
                 }
             } catch (err) {
                 console.log(err);
-
+                I
             }
         }
 
 
     },
+
+    /**
+     * **********************************************************************************
+     *                                  UPDATE NOTE
+     * **********************************************************************************
+     */
     notesfiles.prototype.updateNote = {
         type: userAuth,
         args: {
-            id: {
+            noteId: {
                 type: new GraphqlNonNull(GraphqlString)
             },
             title: {
@@ -143,7 +169,7 @@ notesfiles.prototype.createNote = {
             }
             var secret = "abcdefg"
             var payload = await jwt.verify(context.token, secret);
-           
+
             if (payload) {
                 console.log("parent titlt", parent._id);
 
