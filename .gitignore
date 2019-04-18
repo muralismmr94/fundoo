@@ -1,4 +1,4 @@
 /node_modules
-/.env
-/testJson.json
+.env
+testJson.json
 

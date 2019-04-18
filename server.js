@@ -19,6 +19,9 @@ const expressGraphQl = require("express-graphql");
 const bodyparser = require('body-parser');
 require('dotenv').config();
 var redis = require('redis');
+var passport = require('passport');
+var session = require('express-session');
+
 //define the application as as express
 const app = express();
 //importing the user schema
@@ -56,6 +59,17 @@ client.on('connect', function () {
 client.on('error', function (err) {
   console.log('Something went wrong to connect on redis' + err);
 });
+
+
+// creating session
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // exporting the module
 module.exports = app
