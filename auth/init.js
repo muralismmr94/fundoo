@@ -1,15 +1,15 @@
 var passport = require('passport');
-var User = require('../models/gitModel');
+var User = require('../models/users');
 
 
 module.exports = function() {
 
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user._id);
   });
 
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function (err, user) {
+    User.findById(_id, function (err, user) {
       done(err, user);
     });
   });

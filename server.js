@@ -63,7 +63,7 @@ client.on('error', function (err) {
 
 // creating session
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'abcdefg',
   resave: true,
   saveUninitialized: true
 }));
@@ -72,4 +72,4 @@ app.use(passport.session());
 
 
 // exporting the module
-module.exports = app
+module.exports = app;

@@ -163,8 +163,8 @@ labels.prototype.updateLabel = {
         // verifing the token
         var payload = await jwt.verify(context.token, secret);
         var update = await labelModel.findByIdAndUpdate({ "_id": param.id }, { $set: { "label": param.label } })
-        //console.log(update);
-
+   
+        // if updated is true its printed otherwise else printed
         if (update) {
             console.log("label updated successfully")
             return {

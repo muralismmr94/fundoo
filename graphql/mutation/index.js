@@ -14,6 +14,8 @@ var updateLabel = require('./labels').updateLabel;
 var addNote = require('./notes').createNote;
 var removeNote = require('./notes').deleteNotes;
 var updateNote = require('./notes').updateNote;
+var addLabelNote = require('./notes').labelNoteAdd;
+var removeLabelNote = require('./notes').labelNoteDelete;
 /**
  * exporting the files 
  */
@@ -30,6 +32,8 @@ module.exports = new GraphQLObjectType({
   updateLabel,
   addNote,
   removeNote,
-  updateNote
+  updateNote,
+  addLabelNote,
+  removeLabelNote
 }
 })

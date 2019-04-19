@@ -150,7 +150,12 @@ allFiles.prototype.login = {
     if (user.length == 0) {
       console.log("login unsuccess please try again");
       return { "message": "login unsuccessful" }
-
+    }
+    if(user[0].verified === false){
+      console.log("email verificatation failed....please check email id");
+      return{
+        "message":"email verification failed...please check email id"
+      }
     }
     //user found means returns the success message 
     else {

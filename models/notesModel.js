@@ -6,12 +6,12 @@ var notesSchema = new Schemaaa({
         type:String,
         required:true
     },
-    labelId:{
-        type:String,
-        required:true
-        // type:Schemaaa.Types.ObjectId,
-        // ref:"labelSchema"
-    },
+    labelId:[{
+        // type:String,
+        // required:true
+        type:Schemaaa.Types.ObjectId,
+        ref:"labelSchema"
+    }],
     title: {
         type: String,
         require: true
