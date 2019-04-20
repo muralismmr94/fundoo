@@ -81,9 +81,7 @@ describe('GraphQL', () => {
                 * if expected data comes means its shows register success
                 */
                 expect(JSON.parse(res.text).data.registerUser.message).to.deep.equal(
-
                     "registration unsuccessful , email already exists"
-
                 )
                 done()
             })

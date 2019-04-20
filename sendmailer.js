@@ -34,7 +34,7 @@ exports.sendEmailer = (url, mailaddress) => {
      * setting the mail options .
      */
     const mailOptions = {
-        from: process.env.email,
+        from: process.env.EMAIL,
         to: mailaddress,
         subject: ' password reset link ',
         text: 'Please go through the e-mail verifiction link provided in this mail:\n\n' + url

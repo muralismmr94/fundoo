@@ -38,7 +38,7 @@ notesfiles.prototype.createNote = {
         }
     },
     // resolve function for create note
-    async resolve(parent, params, context) {
+    async resolve(_parent, params, context) {
         try {
             if (params.title.length < 3) {
                 console.log("please enter a minimum 3 charecters in title");

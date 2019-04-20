@@ -22,7 +22,6 @@ var labelModel = require('../../models/labelsModels');
 var notesModel = require("../../models/notesModel")
 var labelType = require('../types/users').labelType;
 var noteType = require('../types/users').noteType;
-//const jwt = require('jsonwebtoken');
 
 /**
  * exporting the queryType function and creating the new object 
