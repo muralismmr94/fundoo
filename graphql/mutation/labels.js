@@ -117,7 +117,7 @@ labels.prototype.removeLabel = {
             const secret = "abcdefg"
             //verifing the token
             payload = jwt.verify(context.token, secret);
-            // find the label and deletw
+            // find the label and delete
             const user = await labelModel.findOneAndDelete({ '_id': param.id }).exec();
             //console.log(user);
 

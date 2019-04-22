@@ -17,8 +17,6 @@ var Schema = mongoose.Schema;
 // creating the labals Schema
 var labelSchema = new Schema({
     userid: {
-        // type: String,
-        // required: true
         type: mongoose.Schema.ObjectId,
         ref: "User"
     },

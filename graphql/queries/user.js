@@ -19,7 +19,7 @@ var GraphQLList = require('graphql').GraphQLList;
 var UserModel = require('../../models/users');
 var userType = require('../types/users').userType;
 var labelModel = require('../../models/labelsModels');
-var notesModel = require("../../models/notesModel")
+var notesModel = require("../../models/notesModel");
 var labelType = require('../types/users').labelType;
 var noteType = require('../types/users').noteType;
 

@@ -25,7 +25,6 @@ const readJson = fs.readFileSync('/home/admin1/Desktop/fundoo/test/testJson.json
  * converting string to object type
  */
 const data = JSON.parse(readJson);
-//console.log(`data display ${data.registerUser[0].email} `);
 
 /**
  * the function which holds the collection of tests
@@ -36,7 +35,7 @@ describe('GraphQL', () => {
      * a function which is actually a test of login
      */
     it('loginUser', (done) => {
-        // const jsonObj = testj();
+      
         test(server)
             .post('/graphql')
             .send({

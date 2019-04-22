@@ -49,7 +49,7 @@ notesfiles.prototype.createNote = {
             if (params.description.length < 5) {
                 console.log("please enter a minimum 5 charecters in description");
                 return {
-                    'message': "please enter a minium 5 charecters in description"
+                    'message': "please enter a minimum 5 charecters in description"
                 }
             }
             // verifying the token
