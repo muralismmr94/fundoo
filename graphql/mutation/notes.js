@@ -15,10 +15,10 @@
 var GraphqlNonNull = require('graphql').GraphQLNonNull;
 var GraphqlString = require('graphql').GraphQLString;
 var notesModel = require('../../models/notesModel');
-var userModel = require('../../models/users');
+// var userModel = require('../../models/users');
 var userAuth = require('../types/users').userAuth;
 var jwt = require('jsonwebtoken');
-var labelModel = require('../../models/labelsModels');
+// var labelModel = require('../../models/labelsModels');
 //creating the notesfiles function
 function notesfiles() { }
 
