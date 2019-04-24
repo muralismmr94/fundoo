@@ -22,34 +22,29 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     firstname: {
         type: String,
-        //required: true
-
     },
     lastname: {
         type: String,
-        //required: true
     },
     email: {
         type: String,
-        //required: true
     },
     password: {
         type: String,
-        //required: true
     },
 
     verified: {
         type: Boolean,
         timestamps: true
     },
-    verifyGit:{
-        type:Boolean
+    verifyGit: {
+        type: Boolean
     },
-    gitUserName:{
-        type:String
+    gitUserName: {
+        type: String
     },
-    gitId:{
-        type:String
+    gitId: {
+        type: String
     }
 
 

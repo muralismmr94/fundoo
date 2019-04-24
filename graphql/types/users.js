@@ -14,13 +14,14 @@
  * require the necesarry modules types of graphql
  */
 var GraphQLObjectType = require('graphql').GraphQLObjectType;
+var GraphQLList = require('graphql').GraphQLList;
 var GraphQLID = require('graphql').GraphQLID;
 var GraphQLString = require('graphql').GraphQLString;
+var labelModel = require('../../models/labelsModels');
+var noteModel = require('../../models/notesModel')
 
-/**
- * exporting the user types
- */
-exports.userType = new GraphQLObjectType({
+
+const userType = new GraphQLObjectType({
   name: 'user',
   fields: function () {
     return {
@@ -31,22 +32,36 @@ exports.userType = new GraphQLObjectType({
         type: GraphQLString
       },
       lastname: {
-        type:GraphQLString
+        type: GraphQLString
       },
       email: {
         type: GraphQLString
       },
       password: {
-        type:GraphQLString
+        type: GraphQLString
+      },
+      label: {
+        type: GraphQLList(labelType),
+        async resolve(parent, param, context) {
+          console.log(parent._id)
+          var labels = await labelModel.find({ "userid": parent._id })
+          console.log(labels)
+          return labels
+        }
+
+      },
+      note:{
+        type:GraphQLList(noteType),
+        async resolve(parent,param,context){
+          var notes= await noteModel.find({"userId":parent._id})
+          return notes
+        }
       }
     }
   }
 });
 
-/**
- * exporting the user auth type.
- */
-exports.userAuth = new GraphQLObjectType({
+const userAuth = new GraphQLObjectType({
   name: 'userAuth',
   fields: function () {
     return {
@@ -57,38 +72,37 @@ exports.userAuth = new GraphQLObjectType({
   }
 });
 
-//exporting the label type
-exports.labelType = new GraphQLObjectType({
+
+const labelType = new GraphQLObjectType({
   name: 'labelUser',
   fields: function () {
     return {
       label: {
-        type:GraphQLString
+        type: GraphQLString
       }
     }
   }
 });
-
-// exporting notes type 
-exports.noteType = new GraphQLObjectType({
-  name:'noteUser',
-  fields:function(){
-    return{
-      _id:{
-        type:GraphQLString
+ 
+const noteType = new GraphQLObjectType({
+  name: 'noteUser',
+  fields: function () {
+    return {
+      _id: {
+        type: GraphQLString
       },
-      title:{
-        type:GraphQLString
+      title: {
+        type: GraphQLString
       },
-      description:{
-        type:GraphQLString
-      },
-      labelId:{
-        type:GraphQLString
-      },
-      userId:{
-        type:GraphQLString
+      description: {
+        type: GraphQLString
       }
     }
-  }
+   }
 })
+module.exports={
+  noteType,
+  labelType,
+  userAuth,
+  userType
+}
