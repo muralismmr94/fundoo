@@ -17,6 +17,7 @@ var updateNote = require('./notes').updateNote;
 var addLabelNote = require('./notes').labelNoteAdd;
 var removeLabelNote = require('./notes').labelNoteDelete;
 var socialLogin = require('../mutation/sociallogin').postMethod;
+var socialEmailVerify = require('../mutation/sociallogin').verifyEmail;
 /**
  * exporting the files 
  */
@@ -36,6 +37,7 @@ module.exports = new GraphQLObjectType({
   updateNote,
   addLabelNote,
   removeLabelNote,
-  socialLogin
+  socialLogin,
+  socialEmailVerify
 }
 })

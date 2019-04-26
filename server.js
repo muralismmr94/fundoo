@@ -32,7 +32,8 @@ app.use('/graphql', bodyparser.json(), expressGraphQl(req => ({
   rootValue: global,
   graphiql: true,
   context: {token:req.query.token,
-    code:req.query.code}
+    code:req.query.code,
+  accesstoken:req.query.accesstoken}
 
 })));
 

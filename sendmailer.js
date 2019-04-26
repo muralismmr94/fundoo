@@ -23,7 +23,7 @@ exports.sendEmailer = (url, mailaddress) => {
     /**
      * creating the  nodemailer transport object.
      */
-    const transporter = nodemailer.createTransport({
+       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
             user: process.env.EMAIL,
@@ -36,7 +36,7 @@ exports.sendEmailer = (url, mailaddress) => {
     const mailOptions = {
         from: process.env.EMAIL,
         to: mailaddress,
-        subject: ' password reset link ',
+        subject: ' fundoo email ',
         text: 'Please go through the e-mail verifiction link provided in this mail:\n\n' + url
     };
     /**

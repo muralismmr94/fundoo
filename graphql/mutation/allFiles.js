@@ -80,7 +80,7 @@ allFiles.prototype.register = {
 
       //creating redis client
       var client = redis.createClient();
-      client.set("token", token);
+      client.set("token", token);9
       client.get("token", function (err, result) {
         if (err) {
           console.log(err);
